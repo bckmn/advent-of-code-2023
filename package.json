@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run index.ts run --"
+    "start": "bun run index.ts run --",
+    "format": "prettier . --write"
   },
   "devDependencies": {
     "bun-types": "latest"
@@ -13,5 +14,6 @@
   },
   "dependencies": {
     "commander": "^11.1.0",
+    "prettier": "^3.1.0"
   }
 }
