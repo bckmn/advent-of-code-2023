@@ -1,37 +1,33 @@
 export const partTwo = (input: string[]) => {
   return input.reduce((acc, curr) => {
-    const numbers = findNumbers(curr, []);
+    const numbers = findNumbers(curr);
     const firstNumber = numbers?.at(0) ?? "";
     const secondNumber = numbers?.at(-1) ?? "";
-    console.log("first", firstNumber);
-    console.log("second", secondNumber);
     return secondNumber === "" ? acc : acc + Number(firstNumber + secondNumber);
   }, 0);
 };
 
-function findNumbers(line: string, values: string[]) {
-  if (line.length === 0) return values;
-  const { number, index } = findFirstNumber(line);
-  return findNumbers(
-    line.substring(index + number.length),
-    number === "" ? values : values.concat(wordToNumber(number)),
-  );
+function findWordOccurrences(inputString: string, word: string): { word: string, index: number }[] {
+  const occurrences: { word: string, index: number }[] = [];
+  let index = inputString.indexOf(word);
+
+  while (index !== -1) {
+    occurrences.push({ word, index });
+    index = inputString.indexOf(word, index + 1);
+  }
+
+  return occurrences;
 }
 
-function findFirstNumber(line: string): { number: string; index: number } {
-  const allNumbers = numbers.map((n) => {
-    const maybeIndex = line.indexOf(n);
-    return maybeIndex !== -1 ? { number: n, index: maybeIndex } : undefined;
+function findNumbers(line: string): string[] {
+  const allMatches: { word: string, index: number }[] = [];
+  numbers.forEach(n => {
+    const matches = findWordOccurrences(line, n);
+    matches.forEach(m => allMatches.push({ word: m.word, index: m.index })); 
   });
+    console.log(allMatches.sort((a,b) => a.index < b.index ? -1 : 1));
 
-  if (allNumbers.filter((a) => a).length === 0)
-    return { number: "", index: line.length };
-  const numberWithSmallestIndex = allNumbers
-    .filter((a) => a)
-    .reduce((prev, current) => {
-      return prev && current && prev.index < current.index ? prev : current;
-    });
-  return numberWithSmallestIndex ?? { number: "", index: line.length };
+  return allMatches.map(n => wordToNumber(n.word));
 }
 
 function wordToNumber(word: string) {
