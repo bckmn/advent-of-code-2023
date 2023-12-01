@@ -18,7 +18,7 @@ program
     const path = resolve(import.meta.dir, `days/${padWithZero(day)}`);
     const { runSolution } = require(path);
     const text = await Bun.file(resolve(path, file)).text();
-    console.log("solution:", runSolution(text, part === 2));
+    console.log("solution:", runSolution(text, part === "2"));
   });
 
 program.parse();
