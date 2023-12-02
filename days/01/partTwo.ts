@@ -25,8 +25,8 @@ function findNumbers(line: string): string[] {
     const matches = findWordOccurrences(line, n);
     matches.forEach(m => allMatches.push({ word: m.word, index: m.index })); 
   });
-    console.log(allMatches.sort((a,b) => a.index < b.index ? -1 : 1));
 
+  allMatches.sort((a,b) => a.index < b.index ? -1 : 1);
   return allMatches.map(n => wordToNumber(n.word));
 }
 
