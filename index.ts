@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import { resolve } from "path";
-import { padWithZero } from "./utils";
+import { padWithZero } from "./utils/utils";
 
 const program = new Command("aoc");
 
