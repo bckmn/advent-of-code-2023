@@ -12,12 +12,11 @@ function getPower(rounds: Round[]) {
 }
 
 function minAmountPerColor(rounds: Round[]) {
-  let min: Round = { red: 0, green: 0, blue: 0 };
-  rounds.forEach(r => {
-    if (r.red > min.red) min.red = r.red;
-    if (r.green > min.green) min.green = r.green;
-    if (r.blue > min.blue) min.blue = r.blue;
-  });
-  console.log(min);
-  return min;
+  return rounds.reduce((acc: Round, curr: Round) => {
+    return {
+      red: curr.red > acc.red ? curr.red : acc.red,
+      green: curr.green > acc.green ? curr.green : acc.green,
+      blue: curr.blue > acc.blue ? curr.blue : acc.blue,
+    };
+  }, { red: 0, green: 0, blue: 0 });
 }
