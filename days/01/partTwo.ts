@@ -7,8 +7,11 @@ export const partTwo = (input: string[]) => {
   }, 0);
 };
 
-function findWordOccurrences(inputString: string, word: string): { word: string, index: number }[] {
-  const occurrences: { word: string, index: number }[] = [];
+function findWordOccurrences(
+  inputString: string,
+  word: string,
+): { word: string; index: number }[] {
+  const occurrences: { word: string; index: number }[] = [];
   let index = inputString.indexOf(word);
 
   while (index !== -1) {
@@ -20,14 +23,14 @@ function findWordOccurrences(inputString: string, word: string): { word: string,
 }
 
 function findNumbers(line: string): string[] {
-  const allMatches: { word: string, index: number }[] = [];
-  numbers.forEach(n => {
+  const allMatches: { word: string; index: number }[] = [];
+  numbers.forEach((n) => {
     const matches = findWordOccurrences(line, n);
-    matches.forEach(m => allMatches.push({ word: m.word, index: m.index })); 
+    matches.forEach((m) => allMatches.push({ word: m.word, index: m.index }));
   });
 
-  allMatches.sort((a,b) => a.index < b.index ? -1 : 1);
-  return allMatches.map(n => wordToNumber(n.word));
+  allMatches.sort((a, b) => (a.index < b.index ? -1 : 1));
+  return allMatches.map((n) => wordToNumber(n.word));
 }
 
 function wordToNumber(word: string) {
@@ -44,21 +47,21 @@ function wordToNumber(word: string) {
     case "four":
     case "4":
       return "4";
-      case "five":
+    case "five":
     case "5":
-    return "5";
-      case "six":
+      return "5";
+    case "six":
     case "6":
-    return "6";
-      case "seven":
+      return "6";
+    case "seven":
     case "7":
-    return "7";
-      case "eight":
+      return "7";
+    case "eight":
     case "8":
-    return "8";
-      case "nine":
+      return "8";
+    case "nine":
     case "9":
-    return "9";
+      return "9";
     default:
       return "0";
   }
