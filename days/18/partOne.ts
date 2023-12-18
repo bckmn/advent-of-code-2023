@@ -10,8 +10,8 @@ function calculateArea(instructions: Instruction[]): number {
   let perimeter = 0;
 
   for (const instruction of instructions) {
-    const x1 = x;
-    const y1 = y;
+    const x0 = x;
+    const y0 = y;
     switch (instruction.direction) {
       case "R":
         x += instruction.distance;
@@ -26,7 +26,7 @@ function calculateArea(instructions: Instruction[]): number {
         y -= instruction.distance;
         break;
     }
-    area += x1 * y - x * y1;
+    area += x0 * y - x * y0;
     perimeter += instruction.distance;
   }
 
